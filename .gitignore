@@ -1,0 +1,18 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# App runtime — never commit live data, logs or secrets
+data/
+.env
+*.log
+.ssl-checker.pid
+.ssl-checker-state.json
+
+# Test / tool caches
+.pytest_cache/
+
+# macOS
+.DS_Store

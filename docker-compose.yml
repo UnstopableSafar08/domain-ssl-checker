@@ -1,0 +1,38 @@
+services:
+  ssl-checker:
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./domains.txt:/app/domains.txt:ro
+      - ssl-data:/app/data
+    environment:
+      TEAMS_WEBHOOK_URL: ${TEAMS_WEBHOOK_URL:?Set TEAMS_WEBHOOK_URL in your shell or .env}
+      SSL_CHECKER_SECRET_KEY: ${SSL_CHECKER_SECRET_KEY:-change-me-in-prod}
+      # Uncomment to protect the UI with basic auth:
+      # SSL_CHECKER_USER: ${SSL_CHECKER_USER:-admin}
+      # SSL_CHECKER_PASSWORD: ${SSL_CHECKER_PASSWORD:-change-me}
+      SSL_DOMAINS_FILE: domains.txt
+      SSL_DB_PATH: data/ssl_checker.db
+      SSL_ENABLE_SCHEDULER: 0 # scheduler runs as the sidecar below (never twice)
+      SSL_UI_URL: ${SSL_UI_URL:-http://localhost:5000}
+    # Single worker: the Flask dev path is fine, gunicorn optional.
+    command: ["gunicorn", "--bind", "0.0.0.0:5000", "--workers", "1", "--timeout", "60", "app:app"]
+    restart: unless-stopped
+
+  # Background 5-minute checker + milestone Teams alerts (30d once, 15d once,
+  # daily 14d -> expiry). Shares the SQLite file with the web service.
+  scheduler:
+    build: .
+    volumes:
+      - ssl-data:/app/data
+    environment:
+      TEAMS_WEBHOOK_URL: ${TEAMS_WEBHOOK_URL:?Set TEAMS_WEBHOOK_URL in your shell or .env}
+      SSL_DB_PATH: data/ssl_checker.db
+      SSL_CHECK_INTERVAL_SECONDS: ${SSL_CHECK_INTERVAL_SECONDS:-300}
+      SSL_UI_URL: ${SSL_UI_URL:-http://localhost:5000}
+    command: ["python", "-m", "ssl_checker.cli", "scheduler"]
+    restart: unless-stopped
+
+volumes:
+  ssl-data:

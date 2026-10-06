@@ -1,0 +1,6 @@
+# SSL Checker sample import file (.txt — one domain per line)
+# Lines starting with # and blank lines are ignored.
+example.com
+example.com:8443
+https://expired.badssl.com
+# ports, URLs with paths, and comments like this one are all accepted

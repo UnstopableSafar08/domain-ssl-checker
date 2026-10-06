@@ -1,0 +1,12 @@
+# Sample domains — one per line.
+# Lines starting with # and blank lines are ignored.
+# Formats: example.com | example.com:8443 | https://example.com/path
+
+google.com
+github.com
+expired.badssl.com
+self-signed.badssl.com
+wrong.host.badssl.com
+untrusted-root.badssl.com
+example.com:8443
+https://www.python.org/docs/

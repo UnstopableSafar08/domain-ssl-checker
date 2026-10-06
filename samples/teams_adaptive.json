@@ -1,0 +1,85 @@
+{
+  "type": "message",
+  "attachments": [
+    {
+      "contentType": "application/vnd.microsoft.card.adaptive",
+      "content": {
+        "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+        "type": "AdaptiveCard",
+        "version": "1.4",
+        "body": [
+          {
+            "type": "TextBlock",
+            "text": "🔴 SSL certificates EXPIRED",
+            "weight": "Bolder",
+            "size": "Medium"
+          },
+          {
+            "type": "FactSet",
+            "facts": [
+              {"title": "Expired", "value": "1"},
+              {"title": "Critical", "value": "1"},
+              {"title": "Warning", "value": "1"},
+              {"title": "Failed", "value": "1"},
+              {"title": "OK", "value": "1"},
+              {"title": "Total", "value": "5"}
+            ]
+          },
+          {
+            "type": "TextBlock",
+            "text": "Checked at 2026-10-03 17:45 NPT",
+            "isSubtle": true,
+            "size": "Small"
+          },
+          {
+            "type": "ColumnSet",
+            "columns": [
+              {"type": "Column", "width": "stretch", "items": [{"type": "TextBlock", "text": "Domain", "weight": "Bolder", "size": "Small"}]},
+              {"type": "Column", "width": "auto", "items": [{"type": "TextBlock", "text": "Expiry (NPT)", "weight": "Bolder", "size": "Small"}]},
+              {"type": "Column", "width": "auto", "items": [{"type": "TextBlock", "text": "Days left", "weight": "Bolder", "size": "Small"}]}
+            ],
+            "separator": true
+          },
+          {
+            "type": "ColumnSet",
+            "columns": [
+              {"type": "Column", "width": "stretch", "items": [{"type": "TextBlock", "text": "expired.badssl.com:443 (EXPIRED)", "size": "Small", "wrap": true}]},
+              {"type": "Column", "width": "auto", "items": [{"type": "TextBlock", "text": "2024-03-01 17:45", "size": "Small"}]},
+              {"type": "Column", "width": "auto", "items": [{"type": "TextBlock", "text": "-581", "size": "Small"}]}
+            ]
+          },
+          {
+            "type": "ColumnSet",
+            "columns": [
+              {"type": "Column", "width": "stretch", "items": [{"type": "TextBlock", "text": "short.example.com:443 (CRITICAL)", "size": "Small", "wrap": true}]},
+              {"type": "Column", "width": "auto", "items": [{"type": "TextBlock", "text": "2026-10-06 17:45", "size": "Small"}]},
+              {"type": "Column", "width": "auto", "items": [{"type": "TextBlock", "text": "3", "size": "Small"}]}
+            ]
+          },
+          {
+            "type": "ColumnSet",
+            "columns": [
+              {"type": "Column", "width": "stretch", "items": [{"type": "TextBlock", "text": "soon.example.com:443 (WARNING)", "size": "Small", "wrap": true}]},
+              {"type": "Column", "width": "auto", "items": [{"type": "TextBlock", "text": "2026-10-20 17:45", "size": "Small"}]},
+              {"type": "Column", "width": "auto", "items": [{"type": "TextBlock", "text": "17", "size": "Small"}]}
+            ]
+          },
+          {
+            "type": "ColumnSet",
+            "columns": [
+              {"type": "Column", "width": "stretch", "items": [{"type": "TextBlock", "text": "nxdomain.invalid:443 (ERROR)", "size": "Small", "wrap": true}]},
+              {"type": "Column", "width": "auto", "items": [{"type": "TextBlock", "text": "DNS failure: [Errno -2] Name or service not known", "size": "Small"}]},
+              {"type": "Column", "width": "auto", "items": [{"type": "TextBlock", "text": "error", "size": "Small"}]}
+            ]
+          },
+          {
+            "type": "ActionSet",
+            "actions": [
+              {"type": "Action.OpenUrl", "title": "Open SSL Checker UI", "url": "http://127.0.0.1:5000"}
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+# Keep the Docker build context lean and secret-free.
+.git/
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+data/
+.env
+*.log
+.ssl-checker.pid
+.ssl-checker-state.json
+.DS_Store
+tests/
